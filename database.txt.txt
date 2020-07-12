@@ -1,0 +1,312 @@
+USE [Patpedhi]
+GO
+
+/****** Object:  Table [dbo].[current_amt]    Script Date: 02/15/2014 22:16:07 ******/
+SET ANSI_NULLS ON
+GO
+
+SET QUOTED_IDENTIFIER ON
+GO
+
+CREATE TABLE [dbo].[current_amt](
+	[amtid] [int] IDENTITY(1,1) NOT NULL,
+	[cust_id] [int] NOT NULL,
+	[applied_amt] [float] NOT NULL,
+	[sanction_amt] [float] NOT NULL,
+	[start_date_amt] [date] NOT NULL,
+	[end_date_amt] [date] NOT NULL,
+ CONSTRAINT [PK_current_amt] PRIMARY KEY CLUSTERED 
+(
+	[amtid] ASC
+)WITH (PAD_INDEX  = OFF, STATISTICS_NORECOMPUTE  = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS  = ON, ALLOW_PAGE_LOCKS  = ON) ON [PRIMARY]
+) ON [PRIMARY]
+
+GO
+
+ALTER TABLE [dbo].[current_amt]  WITH CHECK ADD  CONSTRAINT [FK_current_amt_current_cust_id] FOREIGN KEY([cust_id])
+REFERENCES [dbo].[current_customer] ([cust_id])
+GO
+
+ALTER TABLE [dbo].[current_amt] CHECK CONSTRAINT [FK_current_amt_current_cust_id]
+GO
+
+
+USE [Patpedhi]
+GO
+
+/****** Object:  Table [dbo].[current_customer]    Script Date: 02/15/2014 22:20:41 ******/
+SET ANSI_NULLS ON
+GO
+
+SET QUOTED_IDENTIFIER ON
+GO
+
+SET ANSI_PADDING ON
+GO
+
+CREATE TABLE [dbo].[current_customer](
+	[cust_id] [int] IDENTITY(1,1) NOT NULL,
+	[cust_fname] [varchar](50) NOT NULL,
+	[cust_mname] [varchar](50) NOT NULL,
+	[cust_lname] [varchar](50) NOT NULL,
+	[cust_ph] [varchar](12) NOT NULL,
+	[cust_lph] [varchar](12) NULL,
+	[cust_gen] [varchar](2) NOT NULL,
+	[cust_addr] [varchar](200) NOT NULL,
+	[cust_done] [varchar](3) NOT NULL,
+	[cust_status] [varchar](3) NOT NULL,
+ CONSTRAINT [PK_current_customer] PRIMARY KEY CLUSTERED 
+(
+	[cust_id] ASC
+)WITH (PAD_INDEX  = OFF, STATISTICS_NORECOMPUTE  = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS  = ON, ALLOW_PAGE_LOCKS  = ON) ON [PRIMARY]
+) ON [PRIMARY]
+
+GO
+
+SET ANSI_PADDING OFF
+GO
+
+ALTER TABLE [dbo].[current_customer] ADD  CONSTRAINT [DF_current_customer_cust_done]  DEFAULT ('N') FOR [cust_done]
+GO
+
+ALTER TABLE [dbo].[current_customer] ADD  CONSTRAINT [DF_current_customer_cust_status]  DEFAULT ('Y') FOR [cust_status]
+GO
+
+
+
+
+
+
+
+
+USE [Patpedhi]
+GO
+
+/****** Object:  Table [dbo].[current_documentation]    Script Date: 02/15/2014 22:20:49 ******/
+SET ANSI_NULLS ON
+GO
+
+SET QUOTED_IDENTIFIER ON
+GO
+
+SET ANSI_PADDING ON
+GO
+
+CREATE TABLE [dbo].[current_documentation](
+	[doc_id] [int] IDENTITY(1,1) NOT NULL,
+	[cust_id] [int] NOT NULL,
+	[doc_type] [varchar](50) NOT NULL,
+	[doc_rationcard] [varchar](50) NULL,
+	[doc_lightbill] [varchar](50) NULL,
+	[doc_adhar] [varchar](50) NULL,
+	[doc_election] [varchar](50) NULL,
+	[doc_itreturn] [varchar](50) NULL,
+	[doc_sslip] [varchar](50) NULL,
+	[doc_icard] [varchar](50) NULL,
+	[doc_form16] [varchar](50) NULL,
+	[doc_index2] [varchar](50) NULL,
+	[doc_shopact] [varchar](50) NULL,
+	[doc_PAN] [varchar](50) NULL,
+ CONSTRAINT [PK_current_documentation] PRIMARY KEY CLUSTERED 
+(
+	[doc_id] ASC
+)WITH (PAD_INDEX  = OFF, STATISTICS_NORECOMPUTE  = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS  = ON, ALLOW_PAGE_LOCKS  = ON) ON [PRIMARY]
+) ON [PRIMARY]
+
+GO
+
+SET ANSI_PADDING OFF
+GO
+
+ALTER TABLE [dbo].[current_documentation]  WITH CHECK ADD  CONSTRAINT [FK_current_documentation_current_customer] FOREIGN KEY([cust_id])
+REFERENCES [dbo].[current_customer] ([cust_id])
+GO
+
+ALTER TABLE [dbo].[current_documentation] CHECK CONSTRAINT [FK_current_documentation_current_customer]
+GO
+
+ALTER TABLE [dbo].[current_documentation] ADD  CONSTRAINT [DF_current_documentation_doc_rationcard]  DEFAULT ('n') FOR [doc_rationcard]
+GO
+
+ALTER TABLE [dbo].[current_documentation] ADD  CONSTRAINT [DF_current_documentation_doc_lightbill]  DEFAULT ('n') FOR [doc_lightbill]
+GO
+
+ALTER TABLE [dbo].[current_documentation] ADD  CONSTRAINT [DF_current_documentation_doc_adhar]  DEFAULT ('n') FOR [doc_adhar]
+GO
+
+ALTER TABLE [dbo].[current_documentation] ADD  CONSTRAINT [DF_current_documentation_doc_election]  DEFAULT ('n') FOR [doc_election]
+GO
+
+ALTER TABLE [dbo].[current_documentation] ADD  CONSTRAINT [DF_current_documentation_doc_itreturn]  DEFAULT ('n') FOR [doc_itreturn]
+GO
+
+ALTER TABLE [dbo].[current_documentation] ADD  CONSTRAINT [DF_current_documentation_doc_sslip]  DEFAULT ('n') FOR [doc_sslip]
+GO
+
+ALTER TABLE [dbo].[current_documentation] ADD  CONSTRAINT [DF_current_documentation_doc_icard]  DEFAULT ('n') FOR [doc_icard]
+GO
+
+ALTER TABLE [dbo].[current_documentation] ADD  CONSTRAINT [DF_current_documentation_doc_form16]  DEFAULT ('n') FOR [doc_form16]
+GO
+
+ALTER TABLE [dbo].[current_documentation] ADD  CONSTRAINT [DF_current_documentation_doc_index2]  DEFAULT ('n') FOR [doc_index2]
+GO
+
+ALTER TABLE [dbo].[current_documentation] ADD  CONSTRAINT [DF_current_documentation_doc_shopact]  DEFAULT ('n') FOR [doc_shopact]
+GO
+
+ALTER TABLE [dbo].[current_documentation] ADD  CONSTRAINT [DF_current_documentation_doc_PAN]  DEFAULT ('n') FOR [doc_PAN]
+GO
+
+
+
+
+
+
+USE [Patpedhi]
+GO
+
+/****** Object:  Table [dbo].[current_guarenter]    Script Date: 02/15/2014 22:20:59 ******/
+SET ANSI_NULLS ON
+GO
+
+SET QUOTED_IDENTIFIER ON
+GO
+
+SET ANSI_PADDING ON
+GO
+
+CREATE TABLE [dbo].[current_guarenter](
+	[gua_id] [int] IDENTITY(1,1) NOT NULL,
+	[doc_id] [int] NOT NULL,
+	[cust_id] [int] NOT NULL,
+	[gua_fname] [varchar](50) NULL,
+	[gua_mname] [varchar](50) NULL,
+	[gua_lname] [varchar](50) NULL,
+	[gua_type] [varchar](50) NOT NULL,
+	[gua_pan] [varchar](50) NULL,
+	[gua_rationcard] [varchar](50) NULL,
+	[gua_lightbill] [varchar](50) NULL,
+	[gua_adhar] [varchar](50) NULL,
+	[gua_election] [varchar](50) NULL,
+	[gua_itreturn] [varchar](50) NULL,
+	[gua_sslip] [varchar](50) NULL,
+	[gua_icard] [varchar](50) NULL,
+	[gua_form16] [varchar](50) NULL,
+	[gua_index2] [varchar](50) NULL,
+	[gua_comment] [varchar](50) NULL,
+ CONSTRAINT [PK_current_guarenter] PRIMARY KEY CLUSTERED 
+(
+	[gua_id] ASC
+)WITH (PAD_INDEX  = OFF, STATISTICS_NORECOMPUTE  = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS  = ON, ALLOW_PAGE_LOCKS  = ON) ON [PRIMARY]
+) ON [PRIMARY]
+
+GO
+
+SET ANSI_PADDING OFF
+GO
+
+ALTER TABLE [dbo].[current_guarenter]  WITH CHECK ADD  CONSTRAINT [FK_current_guarenter_current_customer] FOREIGN KEY([cust_id])
+REFERENCES [dbo].[current_customer] ([cust_id])
+GO
+
+ALTER TABLE [dbo].[current_guarenter] CHECK CONSTRAINT [FK_current_guarenter_current_customer]
+GO
+
+ALTER TABLE [dbo].[current_guarenter]  WITH CHECK ADD  CONSTRAINT [FK_current_guarenter_current_guarenter] FOREIGN KEY([doc_id])
+REFERENCES [dbo].[current_documentation] ([doc_id])
+GO
+
+ALTER TABLE [dbo].[current_guarenter] CHECK CONSTRAINT [FK_current_guarenter_current_guarenter]
+GO
+
+ALTER TABLE [dbo].[current_guarenter] ADD  CONSTRAINT [DF_current_guarenter_gua_pan]  DEFAULT ('n') FOR [gua_pan]
+GO
+
+ALTER TABLE [dbo].[current_guarenter] ADD  CONSTRAINT [DF_current_guarenter_gua_rationcard]  DEFAULT ('n') FOR [gua_rationcard]
+GO
+
+ALTER TABLE [dbo].[current_guarenter] ADD  CONSTRAINT [DF_current_guarenter_gua_lightbill]  DEFAULT ('n') FOR [gua_lightbill]
+GO
+
+ALTER TABLE [dbo].[current_guarenter] ADD  CONSTRAINT [DF_current_guarenter_gua_adhar]  DEFAULT ('n') FOR [gua_adhar]
+GO
+
+ALTER TABLE [dbo].[current_guarenter] ADD  CONSTRAINT [DF_current_guarenter_gua_election]  DEFAULT ('n') FOR [gua_election]
+GO
+
+ALTER TABLE [dbo].[current_guarenter] ADD  CONSTRAINT [DF_current_guarenter_gua_itreturn]  DEFAULT ('n') FOR [gua_itreturn]
+GO
+
+ALTER TABLE [dbo].[current_guarenter] ADD  CONSTRAINT [DF_current_guarenter_gua_sslip]  DEFAULT ('n') FOR [gua_sslip]
+GO
+
+ALTER TABLE [dbo].[current_guarenter] ADD  CONSTRAINT [DF_current_guarenter_gua_icard]  DEFAULT ('n') FOR [gua_icard]
+GO
+
+ALTER TABLE [dbo].[current_guarenter] ADD  CONSTRAINT [DF_current_guarenter_gua_form16]  DEFAULT ('n') FOR [gua_form16]
+GO
+
+ALTER TABLE [dbo].[current_guarenter] ADD  CONSTRAINT [DF_current_guarenter_gua_index2]  DEFAULT ('n') FOR [gua_index2]
+GO
+
+ALTER TABLE [dbo].[current_guarenter] ADD  CONSTRAINT [DF_current_guarenter_gua_comment]  DEFAULT ('n') FOR [gua_comment]
+GO
+
+
+
+
+
+
+
+USE [Patpedhi]
+GO
+
+/****** Object:  Table [dbo].[current_sanction]    Script Date: 02/15/2014 22:21:08 ******/
+SET ANSI_NULLS ON
+GO
+
+SET QUOTED_IDENTIFIER ON
+GO
+
+CREATE TABLE [dbo].[current_sanction](
+	[Sanction_id] [int] IDENTITY(1,1) NOT NULL,
+	[Sanction_amt_month] [float] NULL,
+	[Sanction_date] [date] NULL,
+	[Sanction_done] [float] NULL
+) ON [PRIMARY]
+
+GO
+
+
+
+
+USE [Patpedhi]
+GO
+
+/****** Object:  Table [dbo].[Users]    Script Date: 02/15/2014 22:21:17 ******/
+SET ANSI_NULLS ON
+GO
+
+SET QUOTED_IDENTIFIER ON
+GO
+
+SET ANSI_PADDING ON
+GO
+
+CREATE TABLE [dbo].[Users](
+	[user_id] [int] IDENTITY(1,1) NOT NULL,
+	[uname] [varchar](50) NOT NULL,
+	[password] [varchar](50) NOT NULL,
+ CONSTRAINT [PK_Users] PRIMARY KEY CLUSTERED 
+(
+	[user_id] ASC
+)WITH (PAD_INDEX  = OFF, STATISTICS_NORECOMPUTE  = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS  = ON, ALLOW_PAGE_LOCKS  = ON) ON [PRIMARY]
+) ON [PRIMARY]
+
+GO
+
+SET ANSI_PADDING OFF
+GO
+
+
